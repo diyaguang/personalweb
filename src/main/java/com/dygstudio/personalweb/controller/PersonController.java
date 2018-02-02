@@ -2,10 +2,14 @@ package com.dygstudio.personalweb.controller;
 
 import com.dygstudio.personalweb.entity.Dictionary;
 import com.dygstudio.personalweb.entity.PersonInfo;
-import com.dygstudio.personalweb.repository.PersonInfoRepository;
 import com.dygstudio.personalweb.service.DictionaryService;
 import com.dygstudio.personalweb.service.PersonService;
+import org.hibernate.annotations.Filters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -87,5 +91,14 @@ public class PersonController {
             return "1";
         }
         return "0";
+    }
+
+    @RequestMapping("/list")
+    public Page<PersonInfo> list(HttpServletRequest request) throws Exception{
+        String name=request.getParameter("name");
+        String page = request.getParameter("page");
+        String size = request.getParameter("size");
+        Pageable pageable = new PageRequest(page==null?0:Integer.parseInt(page),size==null?10:Integer.parseInt(size),new Sort(Sort.Direction.DESC,"id"));
+        Filters filters = new Filters();
     }
 }
