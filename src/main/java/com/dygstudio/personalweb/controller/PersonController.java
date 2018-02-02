@@ -2,6 +2,7 @@ package com.dygstudio.personalweb.controller;
 
 import com.dygstudio.personalweb.entity.Dictionary;
 import com.dygstudio.personalweb.entity.PersonInfo;
+import com.dygstudio.personalweb.repository.PersonInfoRepository;
 import com.dygstudio.personalweb.service.DictionaryService;
 import com.dygstudio.personalweb.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,11 +46,46 @@ public class PersonController {
         return "1";
     }
 
+    @RequestMapping("/{id}")
     public ModelAndView show(ModelMap model, @PathVariable String id){
         Optional<PersonInfo> result = personService.getPersonByID(id);
         if(result.isPresent())
             model.addAttribute("personInfo",result.get());
         else model.addAttribute("ExceptionInfo","没有找到用户");
         return new ModelAndView("person/show");
+    }
+
+    @RequestMapping("/edit/{id}")
+    public ModelAndView update(ModelMap model,@PathVariable String id){
+        Optional<PersonInfo> result = personService.getPersonByID(id);
+        if(result.isPresent())
+            model.addAttribute("personInfo",result.get());
+        else model.addAttribute("ExceptionInfo","没有找到用户");
+        String positionDicKey = "8b2950565d5c4d06877871c997789306";
+        List<Dictionary> positions = dictionaryService.getDictionaryForType(positionDicKey);
+        model.addAttribute("positions",positions);
+        return new ModelAndView("person/edit");
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/update")
+    public String update(PersonInfo personInfo, HttpServletRequest request) throws Exception{
+        Optional<PersonInfo> result = personService.getPersonByID(personInfo.getId());
+        if(result.isPresent()){
+            PersonInfo old = result.get();
+            old.setName(personInfo.getName());
+            personService.savePerson(old);
+            return "1";
+        }
+        return "0";
+    }
+
+    @RequestMapping(value = "delete/{id}",method = RequestMethod.GET)
+    public String delete(@PathVariable String id) throws Exception{
+        Optional<PersonInfo> result = personService.getPersonByID(id);
+        if(result.isPresent()){
+            personService.deletePerson(id);
+            return "1";
+        }
+        return "0";
     }
 }

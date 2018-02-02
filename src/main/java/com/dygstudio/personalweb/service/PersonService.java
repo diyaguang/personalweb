@@ -16,4 +16,5 @@ public interface PersonService {
     Boolean savePerson(PersonInfo personInfo);
     Optional<PersonInfo> getPersonByID(String id);
     List<PersonInfo> getAll();
+    void deletePerson(String id);
 }

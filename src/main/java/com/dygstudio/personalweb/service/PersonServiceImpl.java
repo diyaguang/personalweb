@@ -30,4 +30,7 @@ public class PersonServiceImpl implements PersonService{
     public List<PersonInfo> getAll(){
         return personInfoRepository.findAll();
     }
+    public void deletePerson(String id){
+        personInfoRepository.deleteById(id);
+    }
 }
