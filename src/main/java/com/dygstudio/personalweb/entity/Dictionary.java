@@ -17,13 +17,13 @@ public class Dictionary {
     private String id;
     private String value;
     private String parent;
-    private Integer order;
+    private Long orderIndex;
 
-    public Integer getOrder() {
-        return order;
+    public Long getOrder() {
+        return orderIndex;
     }
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setOrder(Long orderIndex) {
+        this.orderIndex = orderIndex;
     }
     public String getId() {
         return id;

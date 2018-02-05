@@ -3,6 +3,8 @@ package com.dygstudio.personalweb.service;
 import com.dygstudio.personalweb.entity.PersonInfo;
 import com.dygstudio.personalweb.repository.PersonInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +32,11 @@ public class PersonServiceImpl implements PersonService{
     public List<PersonInfo> getAll(){
         return personInfoRepository.findAll();
     }
+
     public void deletePerson(String id){
         personInfoRepository.deleteById(id);
+    }
+    public Page<PersonInfo> findAll(Pageable pageable){
+        return personInfoRepository.findAll(pageable);
     }
 }

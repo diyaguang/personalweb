@@ -4,7 +4,6 @@ import com.dygstudio.personalweb.entity.Dictionary;
 import com.dygstudio.personalweb.entity.PersonInfo;
 import com.dygstudio.personalweb.service.DictionaryService;
 import com.dygstudio.personalweb.service.PersonService;
-import org.hibernate.annotations.Filters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -99,6 +98,7 @@ public class PersonController {
         String page = request.getParameter("page");
         String size = request.getParameter("size");
         Pageable pageable = new PageRequest(page==null?0:Integer.parseInt(page),size==null?10:Integer.parseInt(size),new Sort(Sort.Direction.DESC,"id"));
-        Filters filters = new Filters();
+        List<PersonInfo> result = personService.findAll(pageable).getContent();
+        return personService.findAll(pageable);
     }
 }

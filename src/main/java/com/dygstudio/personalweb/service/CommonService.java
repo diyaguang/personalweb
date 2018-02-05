@@ -40,7 +40,7 @@ public class CommonService {
         String positionTypeDicKey = UUID.randomUUID().toString().replaceAll("-","");
         positionTypeDic.setId(positionTypeDicKey);
         positionTypeDic.setValue("职位/岗位");
-        positionTypeDic.setOrder(1001);
+        positionTypeDic.setOrder(1001l);
         dictionaryRepository.save(positionTypeDic);
 
         Dictionary positionDic = new Dictionary();
@@ -48,7 +48,7 @@ public class CommonService {
         positionDic.setId(positionDicKey);
         positionDic.setParent(positionTypeDicKey);
         positionDic.setValue("高级开发工程师");
-        positionDic.setOrder(100101);
+        positionDic.setOrder(100101l);
         dictionaryRepository.save(positionDic);
 
         Dictionary positionTestDic = new Dictionary();
@@ -56,7 +56,7 @@ public class CommonService {
         positionTestDic.setId(positionTestDicKey);
         positionTestDic.setParent(positionTypeDicKey);
         positionTestDic.setValue("高级测试工程师");
-        positionTestDic.setOrder(100102);
+        positionTestDic.setOrder(100102l);
         dictionaryRepository.save(positionTestDic);
 
         //option personInfo ----------------
