@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="nav">
+
+    <div class="columnLeftMenu">
+
+        <h6 ><span class="f-right"></span>系统管理</h6>
+        <ul >
+            <li><a th:classappend="${page == 'person/list' ? 'currentPageNav' : ''}" th:href="@{/person/list}">人员管理</a></li>
+            <li><a th:classappend="${page == 'system/dictionary/list' ? 'currentPageNav' : ''}" th:href="@{/system/dictionary/list}">字典管理</a></li>
+        </ul>
+
+    </div>
+</div>
+</body>
+</html>
