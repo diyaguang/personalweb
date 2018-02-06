@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorator="fragments/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Person</title>
+</head>
+<body>
+    <div class="headerBox">
+        <div class="topBox">
+            <div class="topLogo f-left">
+                <a href="#"><img th:src="@{/images/logo.png}"/></a>
+            </div>
+            <div class="new-nav">
+                <h3>用户频道</h3>
+            </div>
+        </div>
+    </div>
+    <div class="locationLine" layout:fragment="prompt">
+        当前位置：首页 &gt; <em>首页</em>
+    </div>
+    <table class="globalMainBox" style="position:relative;z-index: 1">
+        <tr>
+            <td class="columnLeftBox" valign="top">
+                <div th:replace="fragments/nav::nav"></div>
+            </td>
+            <td class="whiteSpace"></td>
+            <td class="rightColumnBox" valign="top">
+                <div layout:fragment="content"></div>
+            </td>
+        </tr>
+    </table>
+    <div class="footBox" th:replace="fragments/footer::footer"></div>
+</body>
+</html>
