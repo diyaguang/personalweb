@@ -5,6 +5,7 @@ import com.dygstudio.personalweb.repository.PersonInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,5 +39,12 @@ public class PersonServiceImpl implements PersonService{
     }
     public Page<PersonInfo> findAll(Pageable pageable){
         return personInfoRepository.findAll(pageable);
+    }
+
+    public PersonInfo findByAgeAndName(Integer age,String name){
+        return personInfoRepository.findByAgeAndName(age,name);
+    }
+    public Page<PersonInfo> findByName(@Param("name") String name, Pageable pageRequest){
+        return personInfoRepository.findByName(name,pageRequest);
     }
 }

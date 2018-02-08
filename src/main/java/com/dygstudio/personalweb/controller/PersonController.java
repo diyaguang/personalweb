@@ -101,4 +101,12 @@ public class PersonController {
         List<PersonInfo> result = personService.findAll(pageable).getContent();
         return personService.findAll(pageable);
     }
+
+    @RequestMapping("/test")
+    public PersonInfo TestMethod(HttpServletRequest request) throws Exception {
+        String name = request.getParameter("name");
+        Integer age = Integer.parseInt(request.getParameter("age"));
+        PersonInfo result = personService.findByAgeAndName(age, name);
+         return result;
+    }
 }

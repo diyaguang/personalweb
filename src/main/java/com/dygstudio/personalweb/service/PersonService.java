@@ -3,6 +3,7 @@ package com.dygstudio.personalweb.service;
 import com.dygstudio.personalweb.entity.PersonInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,5 +20,7 @@ public interface PersonService {
     Optional<PersonInfo> getPersonByID(String id);
     List<PersonInfo> getAll();
     Page<PersonInfo> findAll(Pageable pageable);
+    PersonInfo findByAgeAndName(Integer age,String name);
+    Page<PersonInfo> findByName(@Param("name") String name, Pageable pageRequest);
     void deletePerson(String id);
 }
